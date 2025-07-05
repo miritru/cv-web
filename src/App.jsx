@@ -1,0 +1,506 @@
+import React, { useState, useRef, useEffect } from 'react';
+import MenuTresPuntos from './components/MenuTresPuntos';
+import SeccionDesplegable from './components/SeccionDesplegable';
+import { FaGraduationCap, FaBriefcase, FaUser, FaPhone, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaLinkedin, FaGithub } from 'react-icons/fa';
+import fotocv from './assets/fotocv.jpg';
+
+const colors = {
+  primary: '#3B8E8C',
+  dark: '#1D4E4A',
+  text: '#333',
+  background: '#E6F7F7',
+};
+
+export default function App() {
+  const [abiertoPerfil, setAbiertoPerfil] = useState(false);
+  const [abiertoFormacion, setAbiertoFormacion] = useState(false);
+  const [abiertoExperiencia, setAbiertoExperiencia] = useState(false);
+  const [abiertoContacto, setAbiertoContacto] = useState(false);
+  const [idioma, setIdioma] = useState('es');
+  const [idiomaDropdownAbierto, setIdiomaDropdownAbierto] = useState(false);
+
+  const idiomaRef = useRef(null);
+  const perfilRef = useRef(null);
+  const formacionRef = useRef(null);
+  const experienciaRef = useRef(null);
+  const contactoRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (idiomaRef.current && !idiomaRef.current.contains(event.target)) {
+        setIdiomaDropdownAbierto(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  const textos = {
+    es: {
+      perfil: 'Perfil',
+      formacion: 'Formación',
+      experiencia: 'Experiencia',
+      contacto: 'Contacto',
+      nombre: 'Mirian Trujillo Merino',
+      contactoDatos: {
+        telefono: '627 31 80 30',
+        email: 'mtm.mirian@gmail.com',
+        ubicacion: 'Fuengirola (Málaga)',
+      },
+      secciones: {
+        perfil: (
+          <>
+            <p>Estudiante de Ingeniería Informática | Backend Developer en formación | Java, Python, C, Haskell, Prolog</p>
+            <p>En constante desarrollo y aprendizaje, con el objetivo de continuar mi trayectoria profesional en el sector informático.</p>
+            <p>Soy una persona proactiva, resolutiva ante conflictos y con facilidad de adaptación a los cambios.</p>
+          </>
+        ),
+        formacion: (
+          <>
+            <p><strong>Grado en Ingeniería Informática</strong></p>
+            <p>2022 - Actualidad - Universidad Nacional de Educación a Distancia</p>
+            <p><strong>Máster en Avances en Seguridad alimentaria</strong></p>
+            <p>2018 - 2020 - Universidad de Jaén</p>
+            <p><strong>Máster en Profesorado de ESO y Bachillerato, FP y Enseñanza de Idiomas</strong></p>
+            <p>2018 - 2020 - Universidad de Jaén</p>
+            <p><strong>Grado en Ciencia y Tecnología de los Alimentos</strong></p>
+            <p>2013 - 2017 - Universidad de Granada</p>
+            <p><strong>Formación complementaria:</strong> Inglés B1, Java, Python, Haskell, C, VHDL</p>
+          </>
+        ),
+        experiencia: (
+          <>
+            <p><strong>Técnico de Calidad y Seguridad Alimentaria</strong></p>
+            <p>Embutidos Moreno Plaza (Febrero 2020 - Julio 2025)</p>
+            <ul style={{ paddingLeft: '20px' }}>
+              <li>Gestión de proveedores.</li>
+              <li>Control de trazabilidad.</li>
+              <li>Auditorías (IFS, Sanidad, Ibérico).</li>
+              <li>
+                Control de calidad en planta (buenas prácticas de
+                manipulación, verificación de puntos de control, puntos críticos y limpiezas, control de materia
+                prima, producto intermedio y producto final).
+              </li>
+              <li>Gestión de incidencias. Control documental.</li>
+              <li>Formulación. Fichas técnicas. Etiquetado.</li>
+              <li>Elaboración y verificación de diagramas de flujo.</li>
+              <li>Toma de muestras. Estudios de vida útil.</li>
+              <li>Optimización de controles. Formación.</li>
+            </ul>
+            <p><strong>Técnico de Calidad</strong></p>
+            <p>Avomix (Noviembre 2019 - Enero 2020)</p>
+            <ul style={{ paddingLeft: '20px' }}>
+              <li>Control de calidad en planta y documental.</li>
+            </ul>
+            <p><strong>Técnico de Calidad</strong></p>
+            <p>Puleva Food (Febrero 2017 - Noviembre 2017)</p>
+            <ul style={{ paddingLeft: '20px' }}>
+              <li>Control de Calidad orientado a limpiezas (CIP).</li>
+            </ul>
+          </>
+        ),
+      },
+    },
+    en: {
+      perfil: 'Profile',
+      formacion: 'Education',
+      experiencia: 'Experience',
+      contacto: 'Contact',
+      nombre: 'Mirian Trujillo Merino',
+      contactoDatos: {
+        telefono: '+34 627 31 80 30',
+        email: 'mtm.mirian@gmail.com',
+        ubicacion: 'Fuengirola (Málaga)',
+      },
+      secciones: {
+        perfil: (
+          <>
+            <p>Computer Engineering student | Backend Developer in training | Java, Python, C, Haskell, Prolog</p>
+            <p>Constantly developing and learning, with the goal of continuing my professional career in the IT sector.</p>
+            <p>I am proactive, conflict-resolving, and adapt easily to changes.</p>
+          </>
+        ),
+        formacion: (
+          <>
+            <p><strong>Bachelor's Degree in Computer Engineering</strong></p>
+            <p>2022 - Present - National University of Distance Education</p>
+            <p><strong>Master's in Advances in Food Safety</strong></p>
+            <p>2018 - 2020 - University of Jaén</p>
+            <p><strong>Master's in Teaching ESO and Bachillerato, Vocational Training and Language Teaching</strong></p>
+            <p>2018 - 2020 - University of Jaén</p>
+            <p><strong>Bachelor's Degree in Food Science and Technology</strong></p>
+            <p>2013 - 2017 - University of Granada</p>
+            <p><strong>Additional training:</strong> English B1, Java, Python, Haskell, C, VHDL</p>
+          </>
+        ),
+        experiencia: (
+          <>
+            <p><strong>Food Quality and Safety Technician</strong></p>
+            <p>Embutidos Moreno Plaza (February 2020 - July 2025)</p>
+            <ul style={{ paddingLeft: '20px' }}>
+              <li>Supplier management.</li>
+              <li>Traceability control.</li>
+              <li>Audits (IFS, Health, Iberian).</li>
+              <li>
+                Quality control in the plant (good handling practices, verification of control points,
+                critical points and cleaning, control of raw materials,
+                intermediate product and final product).
+              </li>
+              <li>Incident management. Document control.</li>
+              <li>Formulation. Technical sheets. Labeling.</li>
+              <li>Preparation and verification of flow diagrams.</li>
+              <li>Sampling. Shelf-life studies.</li>
+              <li>Control optimization. Training.</li>
+            </ul>
+            <p><strong>Quality Technician</strong></p>
+            <p>Avomix (November 2019 - January 2020)</p>
+            <ul style={{ paddingLeft: '20px' }}>
+              <li>Plant and documentary quality control.</li>
+            </ul>
+            <p><strong>Quality Technician</strong></p>
+            <p>Puleva Food (February 2017 - November 2017)</p>
+            <ul style={{ paddingLeft: '20px' }}>
+              <li>Quality control focused on cleaning (CIP).</li>
+            </ul>
+          </>
+        ),
+      },
+    },
+  };
+
+  const secciones = [
+    { id: 'perfil', titulo: textos[idioma].perfil },
+    { id: 'formacion', titulo: textos[idioma].formacion },
+    { id: 'experiencia', titulo: textos[idioma].experiencia },
+    { id: 'contacto', titulo: textos[idioma].contacto },
+  ];
+
+  function handleSeleccionar(id) {
+    setAbiertoPerfil(prev => (id === 'perfil' ? !prev : false));
+    setAbiertoFormacion(prev => (id === 'formacion' ? !prev : false));
+    setAbiertoExperiencia(prev => (id === 'experiencia' ? !prev : false));
+    setAbiertoContacto(prev => (id === 'contacto' ? !prev : false));
+
+
+    // const refMap = {
+    //   perfil: perfilRef,
+    //   formacion: formacionRef,
+    //   experiencia: experienciaRef,
+    //   contacto: contactoRef,
+    // };
+
+    // refMap[id]?.current?.scrollIntoView({ behavior: 'smooth' });
+  }
+
+  // ESTILOS RESPONSIVE
+  const containerStyle = {
+    fontFamily: 'Arial, sans-serif',
+    maxWidth: '1000px',
+    margin: '0 auto',
+    padding: 20,
+    lineHeight: 1.6,
+    color: colors.text,
+    backgroundColor: colors.background,
+    minHeight: '100vh',
+    boxSizing: 'border-box',
+  };
+
+  const headerStyle = {
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap', // Para que en pantallas pequeñas se ajusten verticalmente
+    alignItems: 'center',
+    gap: 20,
+    marginBottom: 30,
+    backgroundColor: colors.primary,
+    color: 'white',
+    padding: 20,
+    borderRadius: 10,
+    justifyContent: 'space-between',
+  };
+
+  const headerLeftStyle = {
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignItems: 'center',
+    gap: 20,
+    flex: '1 1 300px',
+  };
+
+  const fotoStyle = {
+    borderRadius: 10,
+    width: 140,
+    height: 140,
+    objectFit: 'cover',
+    border: `3px solid ${colors.dark}`,
+    flexShrink: 0,
+  };
+
+  const nombreYredesStyle = {
+    flex: '1 1 200px',
+    minWidth: 200,
+  };
+
+  const redesStyle = {
+    display: 'flex',
+    gap: 12,
+    marginTop: 8,
+    flexWrap: 'wrap',
+  };
+
+  const idiomaMenuStyle = {
+    display: 'flex',
+    alignItems: 'center',
+    gap: 12,
+    flexWrap: 'wrap',
+    marginTop: 10,
+  };
+
+  const buttonIdiomaStyle = {
+    position: 'relative',
+    backgroundColor: 'transparent',
+    border: '1px solid white',
+    color: 'white',
+    borderRadius: 4,
+    padding: '4px 8px',
+    cursor: 'pointer',
+    fontWeight: 'bold',
+    zIndex: 20,
+  };
+
+  const idiomaDropdownStyle = {
+    position: 'absolute',
+    top: '100%',
+    left: 0,
+    backgroundColor: 'white',
+    color: colors.text,
+    border: `1px solid ${colors.primary}`,
+    borderRadius: 4,
+    overflow: 'hidden',
+    zIndex: 30,
+    fontSize: 14,
+    width: '100%',
+    boxSizing: 'border-box',
+  };
+
+  // Media queries en inline styles no existen nativamente, así que para media queries usaremos estilos CSS en <style> al final
+
+  return (
+    <>
+      <style>{`
+        /* Responsive generales */
+        @media (max-width: 1024px) {
+          .container {
+            max-width: 90vw !important;
+          }
+          .header-left {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+          }
+          .foto {
+            width: 120px !important;
+            height: 120px !important;
+          }
+          .nombre {
+            font-size: 1.5rem !important;
+          }
+          .redes {
+            margin-top: 6px !important;
+          }
+          .idioma-menu {
+            margin-top: 6px !important;
+          }
+        }
+
+        @media (max-width: 600px) {
+          .container {
+            padding: 10px !important;
+          }
+          .header {
+            flex-direction: column !important;
+            gap: 15px !important;
+          }
+          .foto {
+            width: 100px !important;
+            height: 100px !important;
+          }
+          .nombre {
+            font-size: 1.3rem !important;
+          }
+          .redes a {
+            margin-right: 10px;
+          }
+          .idioma-menu {
+            justify-content: center !important;
+          }
+        }
+      `}</style>
+
+      <div className="container" style={containerStyle}>
+        <header className="header" style={headerStyle}>
+          <div className="header-left" style={headerLeftStyle}>
+            <img
+              src={fotocv}
+              alt="Mirian Trujillo Merino"
+              className="foto"
+              style={fotoStyle}
+            />
+            <div style={nombreYredesStyle}>
+              <h1 className="nombre" style={{ margin: 0 }}>{textos[idioma].nombre}</h1>
+              <div className="redes" style={redesStyle}>
+                <a href="https://www.linkedin.com/in/miriantrujillomerino" target="_blank" rel="noopener noreferrer" title="LinkedIn">
+                  <FaLinkedin size={24} color="white" />
+                </a>
+                <a href="https://github.com/miritru" target="_blank" rel="noopener noreferrer" title="GitHub">
+                  <FaGithub size={24} color="white" />
+                </a>
+                <a href="mailto:mtm.mirian@gmail.com" title="Enviar correo">
+                  <FaEnvelope size={24} color="white" />
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div className="idioma-menu" style={idiomaMenuStyle}>
+            <div ref={idiomaRef}>
+              <button
+                onClick={() => setIdiomaDropdownAbierto(!idiomaDropdownAbierto)}
+                style={buttonIdiomaStyle}
+              >
+                {idioma.toUpperCase()}
+                {idiomaDropdownAbierto && (
+                  <div style={idiomaDropdownStyle}>
+                    {idioma !== 'es' && (
+                      <div
+                        onClick={() => {
+                          setIdioma('es');
+                          setIdiomaDropdownAbierto(false);
+                        }}
+                        style={{
+                          padding: '6px 12px',
+                          cursor: 'pointer',
+                          fontWeight: 'bold',
+                        }}
+                      >
+                        ES
+                      </div>
+                    )}
+                    {idioma !== 'en' && (
+                      <div
+                        onClick={() => {
+                          setIdioma('en');
+                          setIdiomaDropdownAbierto(false);
+                        }}
+                        style={{
+                          padding: '6px 12px',
+                          cursor: 'pointer',
+                          fontWeight: 'bold',
+                        }}
+                      >
+                        EN
+                      </div>
+                    )}
+                  </div>
+                )}
+              </button>
+            </div>
+
+            <MenuTresPuntos
+              secciones={[
+                { id: 'perfil', titulo: textos[idioma].perfil },
+                { id: 'formacion', titulo: textos[idioma].formacion },
+                { id: 'experiencia', titulo: textos[idioma].experiencia },
+                { id: 'contacto', titulo: textos[idioma].contacto },
+              ]}
+              onSeleccionar={handleSeleccionar}
+            />
+
+
+          </div>
+        </header>
+
+        <main>
+          <section
+            ref={perfilRef}
+            id="perfil"
+            style={{ marginBottom: 40 }}
+          >
+            <SeccionDesplegable
+              titulo={textos[idioma].perfil}
+              abierto={abiertoPerfil}
+              setAbierto={() => handleSeleccionar('perfil')}
+              icono={<FaUser color={colors.primary} />}
+            >
+              {textos[idioma].secciones.perfil}
+            </SeccionDesplegable>
+          </section>
+
+          <section
+            ref={formacionRef}
+            id="formacion"
+            style={{ marginBottom: 40 }}
+          >
+            <SeccionDesplegable
+              titulo={textos[idioma].formacion}
+              abierto={abiertoFormacion}
+              setAbierto={() => handleSeleccionar('formacion')}
+              icono={<FaGraduationCap color={colors.primary} />}
+            >
+              {textos[idioma].secciones.formacion}
+            </SeccionDesplegable>
+          </section>
+
+          <section
+            ref={experienciaRef}
+            id="experiencia"
+            style={{ marginBottom: 40 }}
+          >
+            <SeccionDesplegable
+              titulo={textos[idioma].experiencia}
+              abierto={abiertoExperiencia}
+              setAbierto={() => handleSeleccionar('experiencia')}
+              icono={<FaBriefcase color={colors.primary} />}
+            >
+              {textos[idioma].secciones.experiencia}
+            </SeccionDesplegable>
+          </section>
+
+          <section
+            ref={contactoRef}
+            id="contacto"
+            style={{ marginBottom: 40 }}
+          >
+            <SeccionDesplegable
+              titulo={textos[idioma].contacto}
+              abierto={abiertoContacto}
+              setAbierto={() => handleSeleccionar('contacto')}
+              icono={<FaPhone color={colors.primary} />}
+            >
+              <div>
+                <p><FaPhone /> {textos[idioma].contactoDatos.telefono}</p>
+                <p><FaEnvelope /> {textos[idioma].contactoDatos.email}</p>
+                <p><FaMapMarkerAlt /> {textos[idioma].contactoDatos.ubicacion}</p>
+              </div>
+            </SeccionDesplegable>
+          </section>
+
+        </main>
+
+        <footer style={{
+          textAlign: 'center',
+          marginTop: 40,
+          fontSize: 14,
+          color: colors.dark,
+          borderTop: `1px solid ${colors.primary}`,
+          paddingTop: 20
+        }}>
+          © 2025 Mirian Trujillo Merino
+        </footer>
+      </div>
+    </>
+  );
+}
