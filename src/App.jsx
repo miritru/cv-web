@@ -53,7 +53,7 @@ export default function App() {
       secciones: {
         perfil: (
           <>
-            <p>Estudiante de Ingeniería Informática | Backend Developer en formación | Java, Python, C, Haskell, Prolog</p>
+            <p>Estudiante de Ingeniería Informática | Full Stack Developer en formación | Java, Python, C, Haskell, Prolog</p>
             <p>En constante desarrollo y aprendizaje, con el objetivo de continuar mi trayectoria profesional en el sector informático.</p>
             <p>Soy una persona proactiva, resolutiva ante conflictos y con facilidad de adaptación a los cambios.</p>
           </>
@@ -118,7 +118,7 @@ export default function App() {
       secciones: {
         perfil: (
           <>
-            <p>Computer Engineering student | Backend Developer in training | Java, Python, C, Haskell, Prolog</p>
+            <p>Computer Engineering student | Full Stack Developer in training | Java, Python, C, Haskell, Prolog</p>
             <p>Constantly developing and learning, with the goal of continuing my professional career in the IT sector.</p>
             <p>I am proactive, conflict-resolving, and adapt easily to changes.</p>
           </>
