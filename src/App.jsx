@@ -204,7 +204,6 @@ export default function App() {
     lineHeight: 1.6,
     color: colors.text,
     backgroundColor: colors.background,
-    minHeight: '100vh',
     boxSizing: 'border-box',
   };
 
@@ -291,65 +290,21 @@ export default function App() {
 
   return (
     <>
-      <style>{`
-        /* Responsive generales */
-        @media (max-width: 1024px) {
-          .container {
-            max-width: 90vw !important;
-          }
-          .header-left {
-            flex-direction: column !important;
-            align-items: flex-start !important;
-          }
-          .foto {
-            width: 120px !important;
-            height: 120px !important;
-          }
-          .nombre {
-            font-size: 1.5rem !important;
-          }
-          .redes {
-            margin-top: 6px !important;
-          }
-          .idioma-menu {
-            margin-top: 6px !important;
-          }
-        }
+      
 
-        @media (max-width: 600px) {
-          .container {
-            padding: 10px !important;
-          }
-          .header {
-            flex-direction: column !important;
-            gap: 15px !important;
-          }
-          .foto {
-            width: 100px !important;
-            height: 100px !important;
-          }
-          .nombre {
-            font-size: 1.3rem !important;
-          }
-          .redes a {
-            margin-right: 10px;
-          }
-          .idioma-menu {
-            justify-content: center !important;
-          }
-        }
-      `}</style>
-
-      <div className="container" style={containerStyle}>
-        <header className="header" style={headerStyle}>
-          <div className="header-left" style={headerLeftStyle}>
+      {/* Floating navbar */}
+      <div className="nav-float" style={{ width: '100%' }}>
+        <div style={{ width: '100%', backgroundColor: colors.primary, padding: 18 }}>
+          <div className="container" style={{ maxWidth: containerStyle.maxWidth, margin: '0 auto' }}>
+            <header className="header d-flex flex-wrap align-items-center justify-content-between" style={{ ...headerStyle, backgroundColor: 'transparent', padding: 0, borderRadius: 0 }}>
+            <div className="header-left d-flex align-items-center flex-grow-1" style={headerLeftStyle}>
             <img
               src={fotocv}
               alt="Mirian Trujillo Merino"
               className="foto"
               style={fotoStyle}
             />
-            <div style={nombreYredesStyle}>
+            <div className="nombre-wrapper" style={nombreYredesStyle}>
               <h1 className="nombre" style={{ margin: 0 }}>{textos[idioma].nombre}</h1>
               <div className="redes" style={redesStyle}>
                 <a href="https://www.linkedin.com/in/miriantrujillomerino" target="_blank" rel="noopener noreferrer" title="LinkedIn">
@@ -365,65 +320,39 @@ export default function App() {
             </div>
           </div>
 
-          <div className="idioma-menu" style={idiomaMenuStyle}>
-            <div ref={idiomaRef}>
-              <button
-                onClick={() => setIdiomaDropdownAbierto(!idiomaDropdownAbierto)}
-                style={buttonIdiomaStyle}
-              >
-                {idioma.toUpperCase()}
-                {idiomaDropdownAbierto && (
-                  <div style={idiomaDropdownStyle}>
-                    {idioma !== 'es' && (
-                      <div
-                        onClick={() => {
-                          setIdioma('es');
-                          setIdiomaDropdownAbierto(false);
-                        }}
-                        style={{
-                          padding: '6px 12px',
-                          cursor: 'pointer',
-                          fontWeight: 'bold',
-                        }}
-                      >
-                        ES
-                      </div>
-                    )}
-                    {idioma !== 'en' && (
-                      <div
-                        onClick={() => {
-                          setIdioma('en');
-                          setIdiomaDropdownAbierto(false);
-                        }}
-                        style={{
-                          padding: '6px 12px',
-                          cursor: 'pointer',
-                          fontWeight: 'bold',
-                        }}
-                      >
-                        EN
-                      </div>
-                    )}
-                  </div>
-                )}
-              </button>
-            </div>
+            <div className="d-flex align-items-center ms-3 header-controls">
+                {/* Desktop-only language toggle (hidden on small screens) */}
+                <button
+                  className="desktop-idioma"
+                  onClick={() => setIdioma(prev => prev === 'es' ? 'en' : 'es')}
+                  style={buttonIdiomaStyle}
+                  title="Cambiar idioma"
+                >
+                  {idioma.toUpperCase()}
+                </button>
 
-            <MenuTresPuntos
-              secciones={[
-                { id: 'perfil', titulo: textos[idioma].perfil },
-                { id: 'formacion', titulo: textos[idioma].formacion },
-                { id: 'experiencia', titulo: textos[idioma].experiencia },
-                { id: 'contacto', titulo: textos[idioma].contacto },
-              ]}
-              onSeleccionar={handleSeleccionar}
-            />
+                <div className="ms-2">
+                  <MenuTresPuntos
+                    secciones={secciones}
+                    onSeleccionar={handleSeleccionar}
+                    nombre={textos[idioma].nombre}
+                    redes={[
+                      { href: 'https://www.linkedin.com/in/miriantrujillomerino', title: 'LinkedIn', icon: <FaLinkedin size={20} color="#1D4E4A" /> },
+                      { href: 'https://github.com/miritru', title: 'GitHub', icon: <FaGithub size={20} color="#1D4E4A" /> },
+                      { type: 'email', href: 'mtm.mirian@gmail.com', label: 'mtm.mirian@gmail.com' },
+                    ]}
+                    idioma={idioma}
+                    onChangeIdioma={(newIso) => { setIdioma(newIso); setIdiomaDropdownAbierto(false); }}
+                  />
+                </div>
+              </div>
+          </header>
+        </div>
+      </div>
+      </div>
 
-
-          </div>
-        </header>
-
-        <main>
+      <div className="container app-inner" style={containerStyle}>
+        <main className="mt-4" style={{ maxWidth: 1000, margin: '0 auto' }}>
           <section
             ref={perfilRef}
             id="perfil"

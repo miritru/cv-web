@@ -5,7 +5,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #f5fbfb; /* light background to match container */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -24,10 +24,11 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  background-color: #f5fbfb;
+  color: #213547;
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
 h1 {
@@ -52,6 +53,252 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+/* Smooth scrolling and small responsive helpers used by App */
+html {
+  scroll-behavior: smooth;
+}
+
+.container {
+  transition: padding 220ms ease, max-width 200ms ease;
+}
+
+.header {
+  transition: all 220ms ease;
+}
+
+.foto {
+  transition: width 220ms ease, height 220ms ease, transform 300ms ease;
+}
+
+/* small touch target improvements */
+button, a {
+  touch-action: manipulation;
+}
+
+@media (max-width: 640px) {
+  h1 { font-size: 1.6rem; }
+}
+
+/* Custom responsive tweaks for the portfolio */
+.app-inner {
+  padding-top: 24px;
+  padding-bottom: 48px;
+}
+
+.header-left .foto,
+.foto {
+  transition: width 220ms ease, height 220ms ease, transform 300ms ease;
+}
+
+@media (min-width: 1000px) {
+  /* On wide screens allow header to be full height and sticky */
+  .header {
+    align-items: center;
+  }
+  .foto {
+    width: 160px !important;
+    height: 160px !important;
+  }
+  /* Ensure controls sit at the right on desktop */
+  .header-controls {
+    margin-left: auto !important;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .nombre-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+/* Floating navbar appearance */
+.nav-float {
+  position: sticky;
+  top: 12px;
+  z-index: 60;
+  pointer-events: auto;
+}
+.nav-float > div {
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(30, 40, 50, 0.12);
+  /* reduce thickness and create floating gaps at sides */
+  padding: 6px 8px !important;
+  /* center and limit width so it never exceeds viewport (prevents horizontal scroll) */
+  margin: 12px auto !important;
+  max-width: calc(100% - 44px) !important;
+  box-sizing: border-box;
+}
+
+/* Larger section titles on desktop */
+@media (min-width: 1000px) {
+  .seccion-btn {
+    font-size: 1.25rem !important;
+  }
+  /* keep photo reasonable size to avoid upscaling/blurriness */
+  .foto {
+    width: 140px !important;
+    height: 140px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .header-left {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center;
+  }
+  .foto {
+    width: 90px !important;
+    height: 90px !important;
+    margin-bottom: 8px;
+  }
+  .nombre {
+    font-size: 1.1rem !important;
+  }
+  .redes {
+    justify-content: center !important;
+  }
+}
+
+/* Mobile: put the language and menu controls next to the photo, compact layout */
+@media (max-width: 560px) {
+  .header-left {
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 12px !important;
+  }
+  .header-left .ms-3 {
+    margin-left: 8px !important;
+  }
+  .header-controls {
+    margin-left: 8px !important;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .idioma-menu button {
+    padding: 4px 8px !important;
+    font-size: 0.85rem !important;
+  }
+
+  /* Reduce nav-float vertical size on small screens */
+  .nav-float > div {
+    padding: 4px 6px !important;
+    margin: 8px auto !important;
+    max-width: calc(100% - 20px) !important;
+  }
+
+  .header {
+    padding: 6px !important;
+    gap: 8px !important;
+  }
+
+  .foto {
+    width: 72px !important;
+    height: 72px !important;
+  }
+
+  .nombre {
+    font-size: 1rem !important;
+  }
+
+  .seccion-btn {
+    font-size: 1rem !important;
+  }
+}
+
+/* Strong mobile compact header rules to avoid large empty colored areas */
+@media (max-width: 480px) {
+  .nav-float > div {
+    padding: 4px 6px !important;
+    max-width: calc(100% - 12px) !important;
+  }
+  .container {
+    padding-left: 6px !important;
+    padding-right: 6px !important;
+  }
+  .header-left {
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 8px !important;
+  }
+  .nombre-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  /* Hide social icons to save vertical space */
+  .redes { display: none !important; }
+  /* Push controls to the right inside the header */
+  .header-controls { margin-left: auto !important; }
+  .idioma-menu button { padding: 3px 6px !important; }
+}
+
+/* Mobile: show only foto and hamburger in header */
+@media (max-width: 420px) {
+  /* Keep desktop-like header layout on small screens but compact it */
+  .header { flex-direction: row !important; align-items: center !important; gap: 12px !important; padding: 8px !important; }
+  .header-left { flex-direction: row !important; align-items: center !important; gap: 12px !important; }
+
+  .foto { width: 110px !important; height: 110px !important; }
+  .nombre { display: block !important; font-size: 1.15rem !important; margin-left: 6px; }
+  .redes { display: flex !important; gap: 10px; margin-left: 8px; }
+
+  /* Controls (idioma + hamburguesa) aligned to the right */
+  .header-controls { margin-left: auto !important; display: flex !important; align-items: center !important; gap: 8px; }
+  .header-controls button { background: transparent; border: none; color: white; font-size: 26px; padding: 6px; }
+  /* Show desktop language toggle next to hamburger on small screens */
+  .desktop-idioma { display: inline-flex !important; }
+}
+
+/* Very small screens tweaks */
+@media (max-width: 360px) {
+  .foto { width: 96px !important; height: 96px !important; }
+  .nombre { font-size: 1rem !important; }
+  .header { padding: 6px !important; }
+  .header-controls button { font-size: 22px !important; padding: 4px !important; }
+  .seccion-btn { font-size: 0.95rem !important; }
+  /* Keep header row layout on very small screens */
+  .header { flex-direction: row !important; }
+  .header-left { flex-direction: row !important; }
+}
+
+@media (max-width: 320px) {
+  .foto { width: 80px !important; height: 80px !important; }
+  .nombre { font-size: 0.95rem !important; }
+  .header { padding: 4px !important; }
+  .header-controls { gap: 6px !important; }
+  .header-controls button { font-size: 20px !important; padding: 3px !important; }
+  .header { flex-direction: row !important; }
+  .header-left { flex-direction: row !important; }
+}
+
+/* Desktop: ensure language toggle is visible */
+@media (min-width: 768px) {
+  .desktop-idioma { display: inline-flex; }
+}
+
+@media (max-width: 420px) {
+  .nav-float > div {
+    padding: 3px 6px !important;
+    max-width: calc(100% - 12px) !important;
+  }
+  .idioma-menu button {
+    padding: 3px 6px !important;
+    font-size: 0.78rem !important;
+  }
+  .header-controls {
+    gap: 4px;
+  }
+}
+
+/* Reduce extra space after footer */
+footer {
+  margin-bottom: 8px;
 }
 
 @media (prefers-color-scheme: light) {
