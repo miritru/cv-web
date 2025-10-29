@@ -3,185 +3,114 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>CV - Mirian Trujillo Merino (Imprimir)</title>
+  <title>CV - Mirian Trujillo Merino (Hacker Style - Print)</title>
   <style>
-    /* Print-friendly compact styles intended to fit on one A4 page */
-    /* Force zero page margin so we control margins via .page padding (some browsers may still apply a minimum margin) */
+    /* Hacker-style variant: we only change card-related styles to a neon/monospace look */
     @page { size: A4; margin: 0; }
     html, body { height: 297mm; margin: 0; padding: 0; }
     body {
       font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      font-size: 15px; /* base text size adjusted to match Perfil lead line */
+  font-size: 14px;
       line-height: 1.18;
-      color: #12323a;
-      background: #f7fdfd;
+      color: #c6ffdf; /* light neon */
+      background: #050607; /* page-level dark background */
       -webkit-print-color-adjust: exact;
       print-color-adjust: exact;
       box-sizing: border-box;
-      padding: 0; /* no page-level padding: contained inside .page */
+      padding: 0;
     }
 
-    .page {
-      /* Full sheet; we control internal margins with padding so printing uses only our margins */
-      width: 210mm;
-      min-height: 297mm;
-      display: flex;
-      flex-direction: column;
-      margin: 0 auto;
-      background: white;
-      border-radius: 4px;
-      box-shadow: 0 8px 20px rgba(18,50,58,0.06);
-      padding: 8mm; /* slightly tighter margin to gain space */
-      box-sizing: border-box;
-    }
+  .page { width: 210mm; min-height: 297mm; display: flex; flex-direction: column; margin: 0 auto; background: #041014; border-radius: 4px; box-shadow: 0 8px 24px rgba(0,255,157,0.04); padding: 6mm; box-sizing: border-box; }
 
-    .header {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      margin-bottom: 8px;
-      background: linear-gradient(180deg, #3B8E8C 0%, #2e7a79 100%);
-      color: white;
-      padding: 10px 10px;
-      border-radius: 6px;
-      box-shadow: 0 6px 16px rgba(59,142,140,0.12);
-    }
+  .header {
+    /* 3-column header: photo | info | icons */
+  display: grid;
+  grid-template-columns: 120px 1fr auto;
+  gap: 10px;
+    align-items: center;
+    margin-bottom: 8px;
+    background: linear-gradient(180deg, #02120f 0%, #00120f 100%);
+    color: #bfffe0;
+  padding: 8px;
+    border-radius: 6px;
+    box-shadow: 0 6px 24px rgba(0,255,157,0.06);
+    font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', monospace;
+  }
     .header-skills { margin-top:6px; display:flex; gap:6px; flex-wrap:wrap; align-items:center }
-    .badge {
-      display:inline-block;
-      background: rgba(255,255,255,0.14);
-      color: white;
-      padding: 4px 8px;
-      border-radius: 999px;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.3px;
-    }
-    .foto {
-      width: 130px;
-      height: 170px; /* increased image to give stronger header presence */
-      object-fit: cover;
-      border-radius: 8px;
-      border: 2px solid rgba(255,255,255,0.18);
-      flex-shrink: 0;
-    }
-    .nombre {
-      font-size: 24px;
-      font-weight: 800;
-      margin: 0 0 6px 0;
-      line-height: 1.02;
-      white-space: nowrap; /* force single line */
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-  .titulo-peque { font-size: 16px; color: rgba(255,255,255,0.95); margin: 0; font-weight:600 }
+    .badge { display:inline-block; background: rgba(255,255,255,0.14); color: white; padding: 4px 8px; border-radius: 999px; font-size: 13px; font-weight: 700; letter-spacing: 0.3px; }
+  .foto { width:120px; height:160px; object-fit:cover; border-radius:8px; border:2px solid rgba(255,255,255,0.08); flex-shrink:0 }
+  .nombre { font-size:24px; font-weight:800; margin:0 0 6px 0; line-height:1.02; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; color:#bfffe0 }
+  .titulo-peque { font-size:16px; color: #9ef0c9; margin:0; font-weight:600 }
+  .contacto { display:flex; flex-direction:column; gap:6px; font-size:16px; margin-top:6px; color: #bfffe0; align-items:flex-start }
+    .contact-row { display:flex; gap:12px; align-items:center; flex-wrap:nowrap }
+      .contacto a { color: rgba(191,255,224,0.95); text-decoration: underline }
+    /* Smaller icons for header and contacts */
+    .social-icon { width:16px; height:16px; display:inline-block; vertical-align:middle; }
+    .contact-icon { width:16px; height:16px; display:inline-block; vertical-align:middle; color: #bfffe0 }
 
-    .contacto {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      font-size: 16px;
-      margin-top: 6px;
-      color: rgba(255,255,255,0.95);
-      align-items: flex-start;
-    }
-    .contact-row { display:flex; gap:12px; align-items:center; flex-wrap:nowrap; }
-    .contacto a { color: rgba(255,255,255,0.95); text-decoration: underline; }
-    .contact-item { display:inline-flex; align-items:center; gap:8px; white-space:nowrap; }
-    .contact-icon { width:20px; height:20px; display:inline-block; vertical-align:middle; color: rgba(255,255,255,0.95); }
-    .social-icon { width:20px; height:20px; }
-    .sr-only { position: absolute !important; width: 1px !important; height: 1px !important; padding: 0 !important; margin: -1px !important; overflow: hidden !important; clip: rect(0,0,0,0) !important; white-space: nowrap !important; border: 0 !important; }
-    .social-link { display:inline-flex; align-items:center; gap:6px; color: #1D4E4A; text-decoration:none; }
-    .social-icon { width:18px; height:18px; display:inline-block; vertical-align:middle; }
+  /* Utility: make an element span full width of grid (both columns) */
+    .full { grid-column: 1 / -1; }
 
-    /* Layout: two columns to save vertical space */
-    .grid {
-      display: grid;
-      /* Top row: perfil (auto height). Bottom row: two columns where Experiencia is wider. */
-      grid-template-columns: 80mm 1fr;
-      grid-template-rows: auto 1fr;
-      gap: 10px 12px;
-      align-items: stretch;
-      height: 100%;
-    }
+  /* Layout adjusted for tighter print fit */
+  .grid { display:grid; grid-template-columns: 75mm 1fr; grid-template-rows: auto 1fr; gap: 8px 10px; align-items: stretch; height: 100%; }
+    .col-left { grid-column: 1 / 2; display:flex; flex-direction:column; gap:8px }
+    .col-right { grid-column: 2 / 3; display:flex; flex-direction:column; gap:8px }
 
-  .col-left { grid-column: 1 / 2; display:flex; flex-direction:column; gap:8px; }
-  .col-right { grid-column: 2 / 3; display:flex; flex-direction:column; gap:8px; }
-
+    /* Section title gets neon accent */
     h2.section-title {
       font-size: 17px;
       margin: 6px 0 6px 0;
-      color: #073b3b;
+      color: #b7ffd8; /* pale neon */
       font-weight: 900;
-      border-left: 6px solid #17a39a;
+      border-left: 6px solid #00ff9d; /* neon green */
       padding-left: 10px;
-      background: linear-gradient(90deg, rgba(23,163,154,0.06), transparent);
+      background: linear-gradient(90deg, rgba(0,255,157,0.04), transparent);
       border-radius: 6px;
       letter-spacing: 0.6px;
+      text-shadow: 0 0 8px rgba(0,255,157,0.12);
     }
+
   .section { margin-bottom: 4px; }
-  /* Paragraphs: small top gap, larger bottom gap to separate entries */
-  .section p { margin: 2px 0 10px 0; font-size: 15px; color: #12323a; line-height: 1.26 }
-  /* Titles (strong) within a paragraph should sit on their own line with minimal gap to the following content */
-  .section p strong { display: block; margin-bottom: 0px; }
-  .section ul { margin: 4px 0 4px 14px; padding: 0; font-size: 15px; }
-  .section ul li { margin-bottom: 4px; }
+  /* Increase contrast for readable body text in hacker dark theme */
+  .section p { margin: 2px 0 8px 0; font-size: 14px; color: #e6fff3; line-height: 1.26 }
+    .section p strong { display:block; margin-bottom: 0px }
+  .section ul { margin: 4px 0 4px 14px; padding: 0; font-size: 15px; color: #e6fff3 }
+  .section ul li { margin-bottom: 4px }
+  .section a { color: #bfffe0; text-decoration: underline }
 
-  /* Card visual style for main sections to reduce white space and improve balance */
-  .card {
-    background: #ffffff;
-    padding: 8px 10px;
-    border-radius: 6px;
-    box-shadow: 0 6px 14px rgba(18,50,58,0.04);
-    border-left: 6px solid rgba(59,142,140,0.12);
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    box-sizing: border-box;
-    flex: 1 1 0;
-  }
-  main { flex: 1 1 auto; }
-  /* Utility: make an element span full width of grid (both columns) */
-  .full { grid-column: 1 / -1; }
-
-  /* Profile highlight (show degree / role clearly) */
-  .role-badge {
-    display:inline-block;
-    background:#e9fffd;
-    color:#0b5550;
-    padding:4px 8px;
-    border-radius:6px;
-    font-weight:700;
-    font-size:13px;
-    margin-top:4px;
-  }
-
-  /* Skill chips used inside Perfil (print-friendly) */
-  .skill-chip { display:inline-block; background:#f1fbfa; color:#0b5250; padding:4px 8px; border-radius:999px; margin:4px 6px 4px 0; font-size:15px; font-weight:600 }
-
-    /* Keep everything compact for printing */
-  .separador { height: 4px; }
-    footer { margin-top: 8px; font-size: 10px; color: #444; }
-
-    /* Print-specific: avoid page breaks inside sections */
-  .section { page-break-inside: avoid; }
-
-    /* If the content still doesn't fit, the user can reduce scale in print dialog.
-       Tiny screens fallback: stack columns */
-    @media (max-width: 900px) {
-      .grid { grid-template-columns: 1fr; }
-      .col-left, .col-right { grid-column: auto; }
-      .page { padding: 10px }
-      .header { flex-direction: row; }
+    /* HACKER-THEMED CARDS */
+    .card {
+      /* Dark glass card with neon left border and mono font for content */
+      background: linear-gradient(180deg, rgba(4,6,8,0.96), rgba(2,10,8,0.98));
+      color: #c6ffdf;
+      padding: 8px 10px;
+      border-radius: 10px;
+      box-shadow: 0 10px 20px rgba(0,255,157,0.06), 0 0 24px rgba(0,255,157,0.02) inset;
+      border-left: 6px solid rgba(0,255,157,0.95);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      box-sizing: border-box;
+      flex: 1 1 0;
+      font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', monospace;
+      letter-spacing: 0.2px;
     }
-    /* Force two-column layout when printing (some browsers apply small viewport widths) */
-    @media print {
-      /* Ensure the print layout uses our box (page) and columns; make Experiencia column wider */
-      .grid { grid-template-columns: 80mm 1fr !important; }
-      .col-left { width: 80mm; }
-      .page { width: 210mm; padding: 8mm; }
-      html, body { height: 297mm; }
-    }
+
+    /* Skill chips styled like terminal tokens */
+  .skill-chip { display:inline-block; background: rgba(0,0,0,0.18); color:#a7ffd0; padding:4px 6px; border-radius:6px; margin:3px 6px 3px 0; font-size:12px; font-weight:700; border:1px solid rgba(0,255,157,0.14); }
+
+    /* Badges also tuned */
+  .badge { background: transparent; color:#bfffe0; padding:3px 6px; border-radius:999px; font-size:12px; font-weight:700; border:1px solid rgba(0,255,157,0.12) }
+
+    .role-badge { display:inline-block; background: rgba(0,255,157,0.08); color:#002b25; padding:4px 8px; border-radius:6px; font-weight:700; font-size:13px; margin-top:4px }
+
+    .separador { height: 4px }
+    footer { margin-top: 8px; font-size: 10px; color: #444 }
+
+    .section { page-break-inside: avoid }
+
+  @media (max-width: 900px) { .grid { grid-template-columns: 1fr } .col-left, .col-right { grid-column: auto } .page { padding: 8px } .header { flex-direction: row } }
+  @media print { .grid { grid-template-columns: 75mm 1fr !important } .col-left { width: 75mm } .page { width: 210mm; padding: 6mm } html, body { height: 297mm } }
   </style>
 </head>
 <body>
