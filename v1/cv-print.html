@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CV - Mirian Trujillo Merino (Imprimir)</title>
+  <style>
+    /* Print-friendly compact styles intended to fit on one A4 page */
+    /* Force zero page margin so we control margins via .page padding (some browsers may still apply a minimum margin) */
+    @page { size: A4; margin: 0; }
+    html, body { height: 297mm; margin: 0; padding: 0; }
+    body {
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-size: 15px; /* base text size adjusted to match Perfil lead line */
+      line-height: 1.18;
+      color: #12323a;
+      background: #f7fdfd;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+      box-sizing: border-box;
+      padding: 0; /* no page-level padding: contained inside .page */
+    }
+
+    .page {
+      /* Full sheet; we control internal margins with padding so printing uses only our margins */
+      width: 210mm;
+      min-height: 297mm;
+      display: flex;
+      flex-direction: column;
+      margin: 0 auto;
+      background: white;
+      border-radius: 4px;
+      box-shadow: 0 8px 20px rgba(18,50,58,0.06);
+      padding: 8mm; /* slightly tighter margin to gain space */
+      box-sizing: border-box;
+    }
+
+    .header {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 8px;
+      background: linear-gradient(180deg, #3B8E8C 0%, #2e7a79 100%);
+      color: white;
+      padding: 10px 10px;
+      border-radius: 6px;
+      box-shadow: 0 6px 16px rgba(59,142,140,0.12);
+    }
+    .header-skills { margin-top:6px; display:flex; gap:6px; flex-wrap:wrap; align-items:center }
+    .badge {
+      display:inline-block;
+      background: rgba(255,255,255,0.14);
+      color: white;
+      padding: 4px 8px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+    .foto {
+      width: 130px;
+      height: 170px; /* increased image to give stronger header presence */
+      object-fit: cover;
+      border-radius: 8px;
+      border: 2px solid rgba(255,255,255,0.18);
+      flex-shrink: 0;
+    }
+    .nombre {
+      font-size: 24px;
+      font-weight: 800;
+      margin: 0 0 6px 0;
+      line-height: 1.02;
+      white-space: nowrap; /* force single line */
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  .titulo-peque { font-size: 16px; color: rgba(255,255,255,0.95); margin: 0; font-weight:600 }
+
+    .contacto {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 16px;
+      margin-top: 6px;
+      color: rgba(255,255,255,0.95);
+      align-items: flex-start;
+    }
+    .contact-row { display:flex; gap:12px; align-items:center; flex-wrap:nowrap; }
+    .contacto a { color: rgba(255,255,255,0.95); text-decoration: underline; }
+    .contact-item { display:inline-flex; align-items:center; gap:8px; white-space:nowrap; }
+    .contact-icon { width:20px; height:20px; display:inline-block; vertical-align:middle; color: rgba(255,255,255,0.95); }
+    .social-icon { width:20px; height:20px; }
+    .sr-only { position: absolute !important; width: 1px !important; height: 1px !important; padding: 0 !important; margin: -1px !important; overflow: hidden !important; clip: rect(0,0,0,0) !important; white-space: nowrap !important; border: 0 !important; }
+    .social-link { display:inline-flex; align-items:center; gap:6px; color: #1D4E4A; text-decoration:none; }
+    .social-icon { width:18px; height:18px; display:inline-block; vertical-align:middle; }
+
+    /* Layout: two columns to save vertical space */
+    .grid {
+      display: grid;
+      /* Top row: perfil (auto height). Bottom row: two columns where Experiencia is wider. */
+      grid-template-columns: 80mm 1fr;
+      grid-template-rows: auto 1fr;
+      gap: 10px 12px;
+      align-items: stretch;
+      height: 100%;
+    }
+
+  .col-left { grid-column: 1 / 2; display:flex; flex-direction:column; gap:8px; }
+  .col-right { grid-column: 2 / 3; display:flex; flex-direction:column; gap:8px; }
+
+    h2.section-title {
+      font-size: 17px;
+      margin: 6px 0 6px 0;
+      color: #073b3b;
+      font-weight: 900;
+      border-left: 6px solid #17a39a;
+      padding-left: 10px;
+      background: linear-gradient(90deg, rgba(23,163,154,0.06), transparent);
+      border-radius: 6px;
+      letter-spacing: 0.6px;
+    }
+  .section { margin-bottom: 4px; }
+  /* Paragraphs: small top gap, larger bottom gap to separate entries */
+  .section p { margin: 2px 0 10px 0; font-size: 15px; color: #12323a; line-height: 1.26 }
+  /* Titles (strong) within a paragraph should sit on their own line with minimal gap to the following content */
+  .section p strong { display: block; margin-bottom: 0px; }
+  .section ul { margin: 4px 0 4px 14px; padding: 0; font-size: 15px; }
+  .section ul li { margin-bottom: 4px; }
+
+  /* Card visual style for main sections to reduce white space and improve balance */
+  .card {
+    background: #ffffff;
+    padding: 8px 10px;
+    border-radius: 6px;
+    box-shadow: 0 6px 14px rgba(18,50,58,0.04);
+    border-left: 6px solid rgba(59,142,140,0.12);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    box-sizing: border-box;
+    flex: 1 1 0;
+  }
+  main { flex: 1 1 auto; }
+  /* Utility: make an element span full width of grid (both columns) */
+  .full { grid-column: 1 / -1; }
+
+  /* Profile highlight (show degree / role clearly) */
+  .role-badge {
+    display:inline-block;
+    background:#e9fffd;
+    color:#0b5550;
+    padding:4px 8px;
+    border-radius:6px;
+    font-weight:700;
+    font-size:13px;
+    margin-top:4px;
+  }
+
+  /* Skill chips used inside Perfil (print-friendly) */
+  .skill-chip { display:inline-block; background:#f1fbfa; color:#0b5250; padding:4px 8px; border-radius:999px; margin:4px 6px 4px 0; font-size:15px; font-weight:600 }
+
+    /* Keep everything compact for printing */
+  .separador { height: 4px; }
+    footer { margin-top: 8px; font-size: 10px; color: #444; }
+
+    /* Print-specific: avoid page breaks inside sections */
+  .section { page-break-inside: avoid; }
+
+    /* If the content still doesn't fit, the user can reduce scale in print dialog.
+       Tiny screens fallback: stack columns */
+    @media (max-width: 900px) {
+      .grid { grid-template-columns: 1fr; }
+      .col-left, .col-right { grid-column: auto; }
+      .page { padding: 10px }
+      .header { flex-direction: row; }
+    }
+    /* Force two-column layout when printing (some browsers apply small viewport widths) */
+    @media print {
+      /* Ensure the print layout uses our box (page) and columns; make Experiencia column wider */
+      .grid { grid-template-columns: 80mm 1fr !important; }
+      .col-left { width: 80mm; }
+      .page { width: 210mm; padding: 8mm; }
+      html, body { height: 297mm; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="header">
+      <img src="src/assets/fotocv.jpg" alt="Mirian Trujillo Merino" class="foto" />
+      <div style="flex:1">
+        <h1 class="nombre">Mirian Trujillo Merino</h1>
+  <p class="titulo-peque">Full Stack Developer en formación | Estudiante de Ingeniería Informática</p>
+        <div class="header-skills" aria-hidden="true">
+          <span class="badge">Java</span>
+          <span class="badge">PHP</span>
+          <span class="badge">Laravel</span>
+          <span class="badge">MySQL</span>
+          <span class="badge">Python</span>
+        </div>
+        <div class="contacto">
+          <div class="contact-row">
+            <div class="contact-item"><svg class="contact-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></svg><span>Fuengirola (Málaga)</span></div>
+            <div class="contact-item"><svg class="contact-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 01.95-.27c1.02.25 2.12.39 3.25.39a1 1 0 011 1v3.5a1 1 0 01-1 1C10.07 21.5 2.5 13.93 2.5 4.5A1 1 0 013.5 3.5H7a1 1 0 011 1c0 1.13.14 2.23.39 3.25.12.44.03.92-.27.95l-2.2 2.09z"/></svg><span>627 31 80 30</span></div>
+          </div>
+          <div class="contact-row">
+            <div class="contact-item"><svg class="contact-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg><a href="mailto:mtm.mirian@gmail.com">mtm.mirian@gmail.com</a></div>
+            <div>
+              <a class="social-link" href="https://www.linkedin.com/in/miriantrujillomerino" target="_blank" rel="noopener noreferrer" title="LinkedIn">
+                <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.025-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.349V9h3.412v1.561h.049c.476-.9 1.637-1.852 3.37-1.852 3.604 0 4.27 2.372 4.27 5.456v6.287zM5.337 7.433a2.062 2.062 0 110-4.124 2.062 2.062 0 010 4.124zM6.979 20.452H3.692V9h3.287v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.726v20.549C0 23.226.792 24 1.771 24h20.451C23.2 24 24 23.226 24 22.275V1.726C24 .774 23.2 0 22.225 0z"/></svg>
+                <span class="sr-only">LinkedIn</span>
+              </a>
+              <a class="social-link" href="https://github.com/miritru" target="_blank" rel="noopener noreferrer" title="GitHub">
+                <svg class="social-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.88-1.54-3.88-1.54-.53-1.36-1.3-1.72-1.3-1.72-1.06-.72.08-.7.08-.7 1.17.08 1.79 1.2 1.79 1.2 1.04 1.78 2.73 1.27 3.4.97.11-.76.41-1.27.75-1.56-2.55-.29-5.24-1.28-5.24-5.7 0-1.26.45-2.29 1.2-3.1-.12-.29-.52-1.47.11-3.07 0 0 .98-.31 3.21 1.18.93-.26 1.93-.39 2.92-.39.99 0 1.99.13 2.92.39 2.23-1.49 3.21-1.18 3.21-1.18.63 1.6.23 2.78.11 3.07.75.81 1.2 1.84 1.2 3.1 0 4.43-2.7 5.41-5.27 5.69.42.36.8 1.08.8 2.18 0 1.58-.01 2.85-.01 3.24 0 .31.21.68.8.56C20.71 21.39 24 17.08 24 12 24 5.73 18.27.5 12 .5z"/></svg>
+                <span class="sr-only">GitHub</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div class="grid">
+        <!-- Top row: Perfil spanning full width -->
+        <section class="section card full">
+          <h2 class="section-title">Perfil</h2>
+          <p style="font-size:15px; margin:0 0 6px 0">Full Stack Developer en formación | Estudiante de Ingeniería Informática</p>
+          <div>
+            <span class="skill-chip">Java</span>
+            <span class="skill-chip">PHP</span>
+            <span class="skill-chip">Laravel</span>
+            <span class="skill-chip">MySQL</span>
+            <span class="skill-chip">Python</span>
+          </div>
+          <p style="margin-top:6px;">En constante desarrollo y aprendizaje, con el objetivo de continuar mi trayectoria profesional en el sector informático.</p>
+          <p>Soy una persona proactiva, resolutiva ante conflictos y con facilidad de adaptación a los cambios.</p>
+        </section>
+
+        <!-- Bottom-left: Formación -->
+        <div class="col-left">
+          <section class="section card">
+            <h2 class="section-title">Formación</h2>
+            <p><strong>Grado en Ingeniería Informática</strong><br/>2022 - Actualidad — Universidad Nacional de Educación a Distancia</p>
+            <p><strong>Máster en Avances en Seguridad alimentaria</strong><br/>2018 - 2020 — Universidad de Jaén</p>
+            <p><strong>Máster en Profesorado de ESO y Bachillerato, FP y Enseñanza de Idiomas</strong><br/>2018 - 2020 — Universidad de Jaén</p>
+            <p><strong>Grado en Ciencia y Tecnología de los Alimentos</strong><br/>2013 - 2017 — Universidad de Granada</p>
+            <p style="margin-top:6px; font-size:15px;"><strong>Formación complementaria:</strong></p>
+            <p style="font-size:15px; margin:4px 0 0 0">Inglés B1 · Java · Python · Haskell · C · VHDL</p>
+          </section>
+        </div>
+
+        <!-- Bottom-right: Experiencia -->
+        <div class="col-right">
+          <section class="section card">
+            <h2 class="section-title">Experiencia</h2>
+              <p><strong>Colaboradora en desarrollo de aplicaciones</strong><br/>Proyecto Colaborativo (Septiembre 2025 - Actualidad)</p>
+              <p>Proyecto Booksycle:</p>
+              <p>Colaboración en el desarrollo de Booksycle, una aplicación para Android, iOS y Web centrada en la compra y venta de libros de segunda mano.</p>
+              <p>Participación en todo el proceso desde la idea hasta el MVP, utilizando React, Laravel, PHP y MySQL (Full Stack).</p>
+              <p>Trabajo en equipo con otros desarrolladores en un entorno ágil y colaborativo.</p>
+              <p><a href="https://www.booksycle.com" target="_blank" rel="noopener">www.booksycle.com</a></p>
+            <p style="margin-top:6px;"><strong>Técnico de Calidad y Seguridad Alimentaria</strong><br/>Embutidos Moreno Plaza (Febrero 2020 - Julio 2025)</p>
+            <p><strong>Técnico de Calidad</strong><br/>Avomix (Noviembre 2019 - Enero 2020)</p>
+            <p><strong>Técnico de Calidad</strong><br/>Puleva Food (Febrero 2017 - Noviembre 2017)</p>
+          </section>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
