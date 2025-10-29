@@ -73,6 +73,16 @@ export default function App() {
         ),
         experiencia: (
           <>
+            <p><strong>Colaboradora en desarrollo de aplicación - Proyecto Booksycle</strong></p>
+            <p>Proyecto Colaborativo (Septiembre 2025 - Actualidad)</p>
+            <p>Colaboración en el desarrollo de Booksycle, una aplicación para Android, iOS y Web orientada a la compra y venta de libros de segunda mano. Participación en todo el proceso desde la idea hasta el MVP, utilizando React, Laravel, PHP y MySQL (Full Stack). Trabajo en equipo junto a otros desarrolladores en un entorno ágil y colaborativo.</p>
+            <ul style={{ paddingLeft: '20px' }}>
+              <li>Desarrollo front-end con React para la versión web y componentes reutilizables para mobile.</li>
+              <li>Desarrollo back-end con Laravel/PHP y diseño de la base de datos en MySQL.</li>
+              <li>Participación en diseño del producto, planificación de sprints y pruebas del MVP.</li>
+              <li>Trabajo en equipo y revisión de código en entorno colaborativo.</li>
+            </ul>
+
             <p><strong>Técnico de Calidad y Seguridad Alimentaria</strong></p>
             <p>Embutidos Moreno Plaza (Febrero 2020 - Julio 2025)</p>
             <ul style={{ paddingLeft: '20px' }}>
@@ -138,6 +148,16 @@ export default function App() {
         ),
         experiencia: (
           <>
+            <p><strong>Collaborator — Application Development (Project Booksycle)</strong></p>
+            <p>Collaborative Project (September 2025 - Present)</p>
+            <p>Collaboration on the development of Booksycle, an Android, iOS and Web application focused on buying and selling second-hand books. Participation across the whole process from idea to MVP using React, Laravel, PHP and MySQL (Full Stack). Team work with other developers in an agile and collaborative environment.</p>
+            <ul style={{ paddingLeft: '20px' }}>
+              <li>Front-end development with React for the web and reusable components for mobile.</li>
+              <li>Back-end development with Laravel/PHP and MySQL database design.</li>
+              <li>Product design, sprint planning and MVP testing participation.</li>
+              <li>Team collaboration and code review in a collaborative workflow.</li>
+            </ul>
+
             <p><strong>Food Quality and Safety Technician</strong></p>
             <p>Embutidos Moreno Plaza (February 2020 - July 2025)</p>
             <ul style={{ paddingLeft: '20px' }}>
@@ -296,7 +316,7 @@ export default function App() {
       <div className="nav-float" style={{ width: '100%' }}>
         <div style={{ width: '100%', backgroundColor: colors.primary, padding: 18 }}>
           <div className="container" style={{ maxWidth: containerStyle.maxWidth, margin: '0 auto' }}>
-            <header className="header d-flex flex-wrap align-items-center justify-content-between" style={{ ...headerStyle, backgroundColor: 'transparent', padding: 0, borderRadius: 0 }}>
+            <header className="header d-flex flex-wrap align-items-center justify-content-between" style={{ ...headerStyle, backgroundColor: 'transparent', padding: 0, borderRadius: 0, marginBottom: 0 }}>
             <div className="header-left d-flex align-items-center flex-grow-1" style={headerLeftStyle}>
             <img
               src={fotocv}
@@ -305,7 +325,19 @@ export default function App() {
               style={fotoStyle}
             />
             <div className="nombre-wrapper" style={nombreYredesStyle}>
-              <h1 className="nombre" style={{ margin: 0 }}>{textos[idioma].nombre}</h1>
+              {/* Split name into two spans so we can force two lines on mobile via CSS */}
+              {(() => {
+                const fullName = textos[idioma].nombre || '';
+                const parts = fullName.split(' ');
+                const first = parts[0] || fullName;
+                const rest = parts.slice(1).join(' ');
+                return (
+                  <h1 className="nombre" style={{ margin: 0 }}>
+                    <span className="nombre-first">{first}</span>
+                    <span className="nombre-last">{rest ? ` ${rest}` : ''}</span>
+                  </h1>
+                );
+              })()}
               <div className="redes" style={redesStyle}>
                 <a href="https://www.linkedin.com/in/miriantrujillomerino" target="_blank" rel="noopener noreferrer" title="LinkedIn">
                   <FaLinkedin size={24} color="white" />
@@ -322,6 +354,8 @@ export default function App() {
 
             <div className="d-flex align-items-center ms-3 header-controls">
                 {/* Desktop-only language toggle (hidden on small screens) */}
+                {/* (Removed standalone header email - email is available inside the mobile menu) */}
+
                 <button
                   className="desktop-idioma"
                   onClick={() => setIdioma(prev => prev === 'es' ? 'en' : 'es')}

@@ -63,49 +63,8 @@ export default function MenuTresPuntos({ secciones, onSeleccionar, nombre, redes
             overflow: 'hidden',
           }}
         >
-          {isMobile ? (
-            <>
-              <div style={{ padding: 12, borderBottom: '1px solid #eee', display: 'flex', flexDirection: 'column', gap: 8 }}>
-                <div style={{ fontWeight: 700 }}>{nombre}</div>
-                <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-                  {redes?.filter(r=>r.type!=='email').map((r, i) => (
-                    <a key={i} href={r.href} target="_blank" rel="noopener noreferrer" title={r.title} style={{ color: '#333' }}>
-                      {r.icon}
-                    </a>
-                  ))}
-                </div>
-                <div style={{ marginTop: 6, display: 'flex', alignItems: 'center', gap: 8 }}>
-                  <FaEnvelope />
-                  <a href={`mailto:${redes?.find(r=>r.type==='email')?.href || ''}`} style={{ color: '#333', textDecoration: 'none' }}>{redes?.find(r=>r.type==='email')?.label || ''}</a>
-                </div>
-                <div style={{ marginTop: 6 }}>
-                  <button onClick={() => onChangeIdioma && onChangeIdioma('es')} style={{ marginRight: 6, padding: '6px 8px' }} aria-pressed={idioma==='es'}>ES</button>
-                  <button onClick={() => onChangeIdioma && onChangeIdioma('en')} style={{ padding: '6px 8px' }} aria-pressed={idioma==='en'}>EN</button>
-                </div>
-              </div>
-
-              <ul style={{ listStyle: 'none', margin: 0, padding: 8 }}>
-                {secciones.map(({ id, titulo }) => (
-                  <li
-                    key={id}
-                    onClick={() => {
-                      onSeleccionar(id);
-                      setAbierto(false);
-                    }}
-                    style={{
-                      padding: '10px 12px',
-                      cursor: 'pointer',
-                      whiteSpace: 'nowrap',
-                      borderRadius: 6,
-                    }}
-                    onMouseDown={e => e.preventDefault()}
-                  >
-                    {titulo}
-                  </li>
-                ))}
-              </ul>
-            </>
-          ) : (
+          {
+            /* On mobile, show only the section list (Perfil, Formación, Experiencia, Contacto) */
             <ul style={{ listStyle: 'none', margin: 0, padding: 8 }}>
               {secciones.map(({ id, titulo }) => (
                 <li
@@ -121,7 +80,7 @@ export default function MenuTresPuntos({ secciones, onSeleccionar, nombre, redes
                 </li>
               ))}
             </ul>
-          )}
+          }
         </div>
       )}
     </div>
