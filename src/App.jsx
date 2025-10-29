@@ -73,15 +73,13 @@ export default function App() {
         ),
         experiencia: (
           <>
-            <p><strong>Colaboradora en desarrollo de aplicación - Proyecto Booksycle</strong></p>
+            <p><strong>Colaboradora en desarrollo de aplicaciones</strong></p>
             <p>Proyecto Colaborativo (Septiembre 2025 - Actualidad)</p>
-            <p>Colaboración en el desarrollo de Booksycle, una aplicación para Android, iOS y Web orientada a la compra y venta de libros de segunda mano. Participación en todo el proceso desde la idea hasta el MVP, utilizando React, Laravel, PHP y MySQL (Full Stack). Trabajo en equipo junto a otros desarrolladores en un entorno ágil y colaborativo.</p>
-            <ul style={{ paddingLeft: '20px' }}>
-              <li>Desarrollo front-end con React para la versión web y componentes reutilizables para mobile.</li>
-              <li>Desarrollo back-end con Laravel/PHP y diseño de la base de datos en MySQL.</li>
-              <li>Participación en diseño del producto, planificación de sprints y pruebas del MVP.</li>
-              <li>Trabajo en equipo y revisión de código en entorno colaborativo.</li>
-            </ul>
+            <p>Proyecto Booksycle:</p>
+            <p>Colaboración en el desarrollo de Booksycle, una aplicación para Android, iOS y Web centrada en la compra y venta de libros de segunda mano.</p>
+            <p>Participación en todo el proceso desde la idea hasta el MVP, utilizando React, Laravel, PHP y MySQL (Full Stack).</p>
+            <p>Trabajo en equipo con otros desarrolladores en un entorno ágil y colaborativo.</p>
+            <p><a href="https://www.booksycle.com" target="_blank" rel="noopener noreferrer">www.booksycle.com</a></p>
 
             <p><strong>Técnico de Calidad y Seguridad Alimentaria</strong></p>
             <p>Embutidos Moreno Plaza (Febrero 2020 - Julio 2025)</p>
@@ -148,15 +146,13 @@ export default function App() {
         ),
         experiencia: (
           <>
-            <p><strong>Collaborator — Application Development (Project Booksycle)</strong></p>
-            <p>Collaborative Project (September 2025 - Present)</p>
-            <p>Collaboration on the development of Booksycle, an Android, iOS and Web application focused on buying and selling second-hand books. Participation across the whole process from idea to MVP using React, Laravel, PHP and MySQL (Full Stack). Team work with other developers in an agile and collaborative environment.</p>
-            <ul style={{ paddingLeft: '20px' }}>
-              <li>Front-end development with React for the web and reusable components for mobile.</li>
-              <li>Back-end development with Laravel/PHP and MySQL database design.</li>
-              <li>Product design, sprint planning and MVP testing participation.</li>
-              <li>Team collaboration and code review in a collaborative workflow.</li>
-            </ul>
+            <p><strong>Collaborator — Application Development</strong></p>
+            <p>Project Booksycle: Collaborative Project (September 2025 - Present)</p>
+            <p>Project Booksycle:</p>
+            <p>Collaboration in the development of Booksycle, an Android, iOS, and Web application focused on buying and selling second-hand books.</p>
+            <p>Participation in the entire process from the idea to the MVP, using React, Laravel, PHP and MySQL (Full Stack).</p>
+            <p>Teamwork with other developers in an agile and collaborative environment.</p>
+            <p><a href="https://www.booksycle.com" target="_blank" rel="noopener noreferrer">www.booksycle.com</a></p>
 
             <p><strong>Food Quality and Safety Technician</strong></p>
             <p>Embutidos Moreno Plaza (February 2020 - July 2025)</p>

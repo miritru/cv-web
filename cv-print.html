@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>CV - Mirian Trujillo Merino (Imprimir)</title>
+  <style>
+    /* Print-friendly compact styles intended to fit on one A4 page */
+    @page { size: A4; margin: 10mm; }
+    html, body { height: 297mm; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-size: 12px;
+      line-height: 1.18;
+      color: #1f3440;
+      background: white;
+      -webkit-print-color-adjust: exact;
+      box-sizing: border-box;
+      padding: 6mm 8mm;
+    }
+
+    .page {
+      /* Limit content area to printable A4 minus margins */
+      width: calc(210mm - 36mm);
+      min-height: calc(297mm - 36mm);
+    }
+
+    .header {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+    .foto {
+      width: 84px;
+      height: 84px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 2px solid #1D4E4A;
+      flex-shrink: 0;
+    }
+    .nombre {
+      font-size: 18px;
+      font-weight: 800;
+      margin: 0 0 4px 0;
+      line-height: 1.02;
+    }
+    .titulo-peque { font-size: 11px; color: #234; margin: 0; }
+
+    .contacto {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      font-size: 11px;
+      margin-top: 4px;
+    }
+    .contacto a { color: #0b6; text-decoration: none; }
+
+    /* Layout: two columns to save vertical space */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px 18px;
+      align-items: start;
+    }
+
+    .col-left { grid-column: 1 / 2; }
+    .col-right { grid-column: 2 / 3; }
+
+    h2.section-title {
+      font-size: 13px;
+      margin: 6px 0 6px 0;
+      color: #1D4E4A;
+      font-weight: 800;
+    }
+    .section { margin-bottom: 6px; }
+    .section p { margin: 4px 0; font-size: 11px; }
+    .section ul { margin: 6px 0 6px 18px; padding: 0; font-size: 11px; }
+    .section ul li { margin-bottom: 2px; }
+
+    /* Keep everything compact for printing */
+    .separador { height: 6px; }
+    footer { margin-top: 8px; font-size: 10px; color: #444; }
+
+    /* Print-specific: avoid page breaks inside sections */
+    .section { page-break-inside: avoid; }
+
+    /* If the content still doesn't fit, the user can reduce scale in print dialog.
+       Tiny screens fallback: stack columns */
+    @media (max-width: 900px) {
+      .grid { grid-template-columns: 1fr; }
+      .col-left, .col-right { grid-column: auto; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="header">
+      <img src="src/assets/fotocv.jpg" alt="Mirian Trujillo Merino" class="foto" />
+      <div style="flex:1">
+        <h1 class="nombre">Mirian Trujillo<br/>Trujillo Merino</h1>
+        <p class="titulo-peque">Estudiante de Ingeniería Informática — Full Stack Developer en formación</p>
+        <div class="contacto">
+          <div>📍 Fuengirola (Málaga)</div>
+          <div>📞 627 31 80 30</div>
+          <div>✉️ <a href="mailto:mtm.mirian@gmail.com">mtm.mirian@gmail.com</a></div>
+          <div>🔗 <a href="https://www.linkedin.com/in/miriantrujillomerino" target="_blank" rel="noopener">LinkedIn</a></div>
+          <div>🔗 <a href="https://github.com/miritru" target="_blank" rel="noopener">GitHub</a></div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div class="grid">
+        <!-- Left column: Perfil + Formación -->
+        <div class="col-left">
+          <section class="section">
+            <h2 class="section-title">Perfil</h2>
+            <p>Estudiante de Ingeniería Informática | Full Stack Developer en formación | Java, Python, C, Haskell, Prolog</p>
+            <p>En constante desarrollo y aprendizaje, con el objetivo de continuar mi trayectoria profesional en el sector informático.</p>
+            <p>Soy una persona proactiva, resolutiva ante conflictos y con facilidad de adaptación a los cambios.</p>
+          </section>
+
+          <div class="separador"></div>
+
+          <section class="section">
+            <h2 class="section-title">Formación</h2>
+            <p><strong>Grado en Ingeniería Informática</strong><br/>2022 - Actualidad — Universidad Nacional de Educación a Distancia</p>
+            <p><strong>Máster en Avances en Seguridad alimentaria</strong><br/>2018 - 2020 — Universidad de Jaén</p>
+            <p><strong>Máster en Profesorado de ESO y Bachillerato, FP y Enseñanza de Idiomas</strong><br/>2018 - 2020 — Universidad de Jaén</p>
+            <p><strong>Grado en Ciencia y Tecnología de los Alimentos</strong><br/>2013 - 2017 — Universidad de Granada</p>
+            <p><strong>Formación complementaria:</strong> Inglés B1, Java, Python, Haskell, C, VHDL</p>
+          </section>
+        </div>
+
+        <!-- Right column: Experiencia + Contacto resumen -->
+        <div class="col-right">
+          <section class="section">
+            <h2 class="section-title">Experiencia</h2>
+
+            <p><strong>Colaboradora en desarrollo de aplicaciones</strong><br/>Proyecto Colaborativo (Septiembre 2025 - Actualidad)</p>
+            <p>Proyecto Booksycle:</p>
+            <p>Colaboración en el desarrollo de Booksycle, una aplicación para Android, iOS y Web centrada en la compra y venta de libros de segunda mano.</p>
+            <p>Participación en todo el proceso desde la idea hasta el MVP, utilizando React, Laravel, PHP y MySQL (Full Stack).</p>
+            <p>Trabajo en equipo con otros desarrolladores en un entorno ágil y colaborativo.</p>
+            <p><a href="https://www.booksycle.com" target="_blank" rel="noopener">www.booksycle.com</a></p>
+            <p><strong>Técnico de Calidad y Seguridad Alimentaria</strong><br/>Embutidos Moreno Plaza (Febrero 2020 - Julio 2025)</p>
+            <ul>
+              <li>Gestión de proveedores.</li>
+              <li>Control de trazabilidad.</li>
+              <li>Auditorías (IFS, Sanidad, Ibérico).</li>
+              <li>Control de calidad en planta (buenas prácticas de manipulación, verificación de puntos de control, puntos críticos y limpiezas, control de materia prima, producto intermedio y producto final).</li>
+              <li>Gestión de incidencias. Control documental.</li>
+              <li>Formulación. Fichas técnicas. Etiquetado.</li>
+              <li>Elaboración y verificación de diagramas de flujo.</li>
+              <li>Toma de muestras. Estudios de vida útil.</li>
+              <li>Optimización de controles. Formación.</li>
+            </ul>
+
+            <p><strong>Técnico de Calidad</strong><br/>Avomix (Noviembre 2019 - Enero 2020)</p>
+            <ul>
+              <li>Control de calidad en planta y documental.</li>
+            </ul>
+
+            <p><strong>Técnico de Calidad</strong><br/>Puleva Food (Febrero 2017 - Noviembre 2017)</p>
+            <ul>
+              <li>Control de Calidad orientado a limpiezas (CIP).</li>
+            </ul>
+          </section>
+
+          <div class="separador"></div>
+
+          <section class="section">
+            <h2 class="section-title">Contacto</h2>
+            <p>Teléfono: 627 31 80 30</p>
+            <p>Email: <a href="mailto:mtm.mirian@gmail.com">mtm.mirian@gmail.com</a></p>
+            <p>Ubicación: Fuengirola (Málaga)</p>
+          </section>
+        </div>
+      </div>
+
+      <footer>
+        <div style="display:flex; justify-content:space-between; align-items:center; font-size:10px; margin-top:8px;">
+          <div>CV generado para impresión — Mirian Trujillo Merino</div>
+          <div>Última actualización: Octubre 2025</div>
+        </div>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
