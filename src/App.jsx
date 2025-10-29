@@ -1,15 +1,32 @@
 import React, { useState, useRef, useEffect } from 'react';
-import MenuTresPuntos from './components/MenuTresPuntos';
+// Menu replaced by theme toggle in v2 header (no hamburger)
 import SeccionDesplegable from './components/SeccionDesplegable';
-import { FaGraduationCap, FaBriefcase, FaUser, FaPhone, FaEnvelope, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaGraduationCap, FaBriefcase, FaUser, FaPhone, FaEnvelope, FaMapMarkerAlt, FaMoon, FaSun } from 'react-icons/fa';
 import { FaLinkedin, FaGithub } from 'react-icons/fa';
 import fotocv from './assets/fotocv.jpg';
 
-const colors = {
-  primary: '#3B8E8C',
-  dark: '#1D4E4A',
-  text: '#333',
-  background: '#E6F7F7',
+// Theme tokens for v2 (light = cv-print, dark = cv-print-dark)
+const themes = {
+  light: {
+    primary: '#3B8E8C',
+    dark: '#1D4E4A',
+    text: '#12323a',
+    background: '#f7fdfd',
+    navBackground: 'linear-gradient(180deg, #3B8E8C 0%, #2e7a79 100%)',
+    headerText: 'white',
+    cardBackground: '#ffffff',
+    badgeBg: 'rgba(255,255,255,0.14)'
+  },
+  dark: {
+    primary: '#00ff9d',
+    dark: '#002b25',
+    text: '#c6ffdf',
+    background: '#041014',
+    navBackground: 'linear-gradient(180deg, #02120f 0%, #00120f 100%)',
+    headerText: '#bfffe0',
+    cardBackground: 'linear-gradient(180deg, rgba(4,6,8,0.96), rgba(2,10,8,0.98))',
+    badgeBg: 'rgba(255,255,255,0.06)'
+  }
 };
 
 export default function App() {
@@ -19,6 +36,7 @@ export default function App() {
   const [abiertoContacto, setAbiertoContacto] = useState(false);
   const [idioma, setIdioma] = useState('es');
   const [idiomaDropdownAbierto, setIdiomaDropdownAbierto] = useState(false);
+  const [theme, setTheme] = useState('light'); // 'light' | 'dark'
 
   const idiomaRef = useRef(null);
   const perfilRef = useRef(null);
@@ -37,6 +55,22 @@ export default function App() {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+
+  // Persist theme selection; theming is handled by CSS variables and the data-theme attribute
+  useEffect(() => {
+    const saved = window.localStorage.getItem('theme');
+    if (saved && (saved === 'light' || saved === 'dark')) {
+      setTheme(saved);
+    }
+  }, []);
+
+  useEffect(() => {
+    try {
+      window.localStorage.setItem('theme', theme);
+    } catch (e) {}
+    // set a data attribute for CSS hooks; CSS variables defined in index.css will apply the colors
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
 
   const textos = {
     es: {
@@ -194,6 +228,8 @@ export default function App() {
     { id: 'contacto', titulo: textos[idioma].contacto },
   ];
 
+  // theme values are now provided via CSS variables in src/index.css
+
   function handleSeleccionar(id) {
     setAbiertoPerfil(prev => (id === 'perfil' ? !prev : false));
     setAbiertoFormacion(prev => (id === 'formacion' ? !prev : false));
@@ -213,13 +249,13 @@ export default function App() {
 
   // ESTILOS RESPONSIVE
   const containerStyle = {
-    fontFamily: 'Arial, sans-serif',
+    fontFamily: 'inherit',
     maxWidth: '1000px',
     margin: '0 auto',
     padding: 20,
     lineHeight: 1.6,
-    color: colors.text,
-    backgroundColor: colors.background,
+    color: 'var(--text-color)',
+    backgroundColor: 'var(--background-color)',
     boxSizing: 'border-box',
   };
 
@@ -230,8 +266,8 @@ export default function App() {
     alignItems: 'center',
     gap: 20,
     marginBottom: 30,
-    backgroundColor: colors.primary,
-    color: 'white',
+    backgroundColor: 'transparent',
+    color: 'var(--header-text-color)',
     padding: 20,
     borderRadius: 10,
     justifyContent: 'space-between',
@@ -247,11 +283,11 @@ export default function App() {
   };
 
   const fotoStyle = {
-    borderRadius: 10,
+    borderRadius: 6,
     width: 140,
-    height: 140,
+    height: 180,
     objectFit: 'cover',
-    border: `3px solid ${colors.dark}`,
+    border: `3px solid var(--dark-color)`,
     flexShrink: 0,
   };
 
@@ -278,8 +314,8 @@ export default function App() {
   const buttonIdiomaStyle = {
     position: 'relative',
     backgroundColor: 'transparent',
-    border: '1px solid white',
-    color: 'white',
+    border: `1px solid var(--header-text-color)`,
+    color: 'var(--header-text-color)',
     borderRadius: 4,
     padding: '4px 8px',
     cursor: 'pointer',
@@ -292,8 +328,8 @@ export default function App() {
     top: '100%',
     left: 0,
     backgroundColor: 'white',
-    color: colors.text,
-    border: `1px solid ${colors.primary}`,
+    color: 'var(--text-color)',
+    border: `1px solid var(--primary-color)`,
     borderRadius: 4,
     overflow: 'hidden',
     zIndex: 30,
@@ -310,7 +346,7 @@ export default function App() {
 
       {/* Floating navbar */}
       <div className="nav-float" style={{ width: '100%' }}>
-        <div style={{ width: '100%', backgroundColor: colors.primary, padding: 18 }}>
+          <div style={{ width: '100%', background: 'var(--nav-background)', padding: 18 }}>
           <div className="container" style={{ maxWidth: containerStyle.maxWidth, margin: '0 auto' }}>
             <header className="header d-flex flex-wrap align-items-center justify-content-between" style={{ ...headerStyle, backgroundColor: 'transparent', padding: 0, borderRadius: 0, marginBottom: 0 }}>
             <div className="header-left d-flex align-items-center flex-grow-1" style={headerLeftStyle}>
@@ -336,24 +372,24 @@ export default function App() {
               })()}
               <div className="redes" style={redesStyle}>
                 <a href="https://www.linkedin.com/in/miriantrujillomerino" target="_blank" rel="noopener noreferrer" title="LinkedIn">
-                  <FaLinkedin size={24} color="white" />
+                  <FaLinkedin size={24} color={'var(--header-text-color)'} />
                 </a>
                 <a href="https://github.com/miritru" target="_blank" rel="noopener noreferrer" title="GitHub">
-                  <FaGithub size={24} color="white" />
+                  <FaGithub size={24} color={'var(--header-text-color)'} />
                 </a>
                 <a href="mailto:mtm.mirian@gmail.com" title="Enviar correo">
-                  <FaEnvelope size={24} color="white" />
+                  <FaEnvelope size={24} color={'var(--header-text-color)'} />
                 </a>
               </div>
             </div>
           </div>
 
-            <div className="d-flex align-items-center ms-3 header-controls">
+              <div className="d-flex align-items-center ms-3 header-controls">
                 {/* Desktop-only language toggle (hidden on small screens) */}
                 {/* (Removed standalone header email - email is available inside the mobile menu) */}
 
                 <button
-                  className="desktop-idioma"
+                  className="desktop-idioma header-toggle"
                   onClick={() => setIdioma(prev => prev === 'es' ? 'en' : 'es')}
                   style={buttonIdiomaStyle}
                   title="Cambiar idioma"
@@ -361,20 +397,28 @@ export default function App() {
                   {idioma.toUpperCase()}
                 </button>
 
-                <div className="ms-2">
-                  <MenuTresPuntos
-                    secciones={secciones}
-                    onSeleccionar={handleSeleccionar}
-                    nombre={textos[idioma].nombre}
-                    redes={[
-                      { href: 'https://www.linkedin.com/in/miriantrujillomerino', title: 'LinkedIn', icon: <FaLinkedin size={20} color="#1D4E4A" /> },
-                      { href: 'https://github.com/miritru', title: 'GitHub', icon: <FaGithub size={20} color="#1D4E4A" /> },
-                      { type: 'email', href: 'mtm.mirian@gmail.com', label: 'mtm.mirian@gmail.com' },
-                    ]}
-                    idioma={idioma}
-                    onChangeIdioma={(newIso) => { setIdioma(newIso); setIdiomaDropdownAbierto(false); }}
-                  />
-                </div>
+                {/* Theme toggle (replaces hamburger/menu) */}
+                <button
+                  className="ms-2 header-toggle"
+                  onClick={() => setTheme(prev => prev === 'light' ? 'dark' : 'light')}
+                  title={theme === 'light' ? 'Cambiar a modo oscuro' : 'Cambiar a modo claro'}
+                  aria-label={theme === 'light' ? 'Activar modo oscuro' : 'Activar modo claro'}
+                  style={{
+                    marginLeft: 8,
+                    padding: '6px 10px',
+                    borderRadius: 6,
+                    border: '1px solid var(--header-text-color)',
+                    background: 'transparent',
+                    color: 'var(--header-text-color)',
+                    fontWeight: 700,
+                    cursor: 'pointer',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                  }}
+                >
+                  {theme === 'light' ? <FaMoon size={18} /> : <FaSun size={18} />}
+                </button>
               </div>
           </header>
         </div>
@@ -384,60 +428,60 @@ export default function App() {
       <div className="container app-inner" style={containerStyle}>
         <main className="mt-4" style={{ maxWidth: 1000, margin: '0 auto' }}>
           <section
+            className="card-section"
             ref={perfilRef}
             id="perfil"
-            style={{ marginBottom: 40 }}
           >
             <SeccionDesplegable
               titulo={textos[idioma].perfil}
               abierto={abiertoPerfil}
               setAbierto={() => handleSeleccionar('perfil')}
-              icono={<FaUser color={colors.primary} />}
+              icono={<FaUser color={'var(--primary-color)'} />}
             >
               {textos[idioma].secciones.perfil}
             </SeccionDesplegable>
           </section>
 
           <section
+            className="card-section"
             ref={formacionRef}
             id="formacion"
-            style={{ marginBottom: 40 }}
           >
             <SeccionDesplegable
               titulo={textos[idioma].formacion}
               abierto={abiertoFormacion}
               setAbierto={() => handleSeleccionar('formacion')}
-              icono={<FaGraduationCap color={colors.primary} />}
+              icono={<FaGraduationCap color={'var(--primary-color)'} />}
             >
               {textos[idioma].secciones.formacion}
             </SeccionDesplegable>
           </section>
 
           <section
+            className="card-section"
             ref={experienciaRef}
             id="experiencia"
-            style={{ marginBottom: 40 }}
           >
             <SeccionDesplegable
               titulo={textos[idioma].experiencia}
               abierto={abiertoExperiencia}
               setAbierto={() => handleSeleccionar('experiencia')}
-              icono={<FaBriefcase color={colors.primary} />}
+              icono={<FaBriefcase color={'var(--primary-color)'} />}
             >
               {textos[idioma].secciones.experiencia}
             </SeccionDesplegable>
           </section>
 
           <section
+            className="card-section"
             ref={contactoRef}
             id="contacto"
-            style={{ marginBottom: 40 }}
           >
             <SeccionDesplegable
               titulo={textos[idioma].contacto}
               abierto={abiertoContacto}
               setAbierto={() => handleSeleccionar('contacto')}
-              icono={<FaPhone color={colors.primary} />}
+              icono={<FaPhone color={'var(--primary-color)'} />}
             >
               <div>
                 <p><FaPhone /> {textos[idioma].contactoDatos.telefono}</p>
@@ -453,8 +497,8 @@ export default function App() {
           textAlign: 'center',
           marginTop: 40,
           fontSize: 14,
-          color: colors.dark,
-          borderTop: `1px solid ${colors.primary}`,
+          color: 'var(--dark-color)',
+          borderTop: `1px solid var(--primary-color)`,
           paddingTop: 20
         }}>
           © 2025 Mirian Trujillo Merino

@@ -1,16 +1,44 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;900&display=swap');
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  /* Use a more print-like serif for V2 to match the printable HTMLs */
+  font-family: Georgia, 'Times New Roman', Times, serif;
   line-height: 1.5;
   font-weight: 400;
 
+  /* Theme CSS variables (defaults - light) */
+  --primary-color: #3B8E8C;
+  --dark-color: #1D4E4A;
+  --text-color: #12323a;
+  --background-color: #f7fdfd;
+  --background: var(--background-color);
+  --nav-background: linear-gradient(180deg, #3B8E8C 0%, #2e7a79 100%);
+  --header-text-color: white;
+  --card-background: #ffffff;
+  --badge-bg: rgba(255,255,255,0.14);
+
   color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #f5fbfb; /* light background to match container */
+  color: var(--text-color);
+  background-color: var(--background-color); /* light background to match container */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Dark theme variables */
+:root[data-theme="dark"] {
+  --primary-color: #00ff9d;
+  --dark-color: #002b25;
+  --text-color: #c6ffdf;
+  /* make the page and card share the same dark surface (use the card gradient) */
+  --background-color: linear-gradient(180deg, rgba(4,6,8,0.96), rgba(2,10,8,0.98));
+  --background: var(--background-color);
+  --nav-background: linear-gradient(180deg, #02120f 0%, #00120f 100%);
+  --header-text-color: #bfffe0;
+  --card-background: linear-gradient(180deg, rgba(4,6,8,0.96), rgba(2,10,8,0.98));
+  --badge-bg: rgba(255,255,255,0.06);
 }
 
 a {
@@ -26,8 +54,8 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background-color: #f5fbfb;
-  color: #213547;
+  background: var(--background);
+  color: var(--text-color);
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
@@ -59,6 +87,23 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+/* Ensure language and theme toggle share identical dimensions */
+.header-toggle {
+  width: 44px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+/* Slightly larger for wider screens if needed */
+@media (min-width: 1000px) {
+  .header-toggle { width: 48px; height: 44px; }
+}
+
 /* Smooth scrolling and small responsive helpers used by App */
 html {
   scroll-behavior: smooth;
@@ -74,6 +119,14 @@ html {
 
 .foto {
   transition: width 220ms ease, height 220ms ease, transform 300ms ease;
+}
+
+/* Rectangular photo style for V2 (matches printable layout) */
+.foto {
+  border-radius: 6px !important;
+  width: 140px !important;
+  height: 180px !important;
+  object-fit: cover;
 }
 
 /* Name parts: allow first/last to stack on mobile */
@@ -101,6 +154,77 @@ button, a {
   padding-bottom: 48px;
 }
 
+/* Card container for each section to mimic printable CV */
+.card-section {
+  background: var(--card-background);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 8px 18px rgba(20,30,40,0.06);
+  margin-bottom: 18px;
+  transition: background 220ms ease, box-shadow 220ms ease;
+}
+
+/* Stronger contrast in dark mode for cards */
+html[data-theme="dark"] .card-section {
+  box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+}
+
+/* Make card-section look like the print "card" in the dark HTML: neon left border */
+.card-section {
+  border-left: 6px solid var(--primary-color);
+  color: var(--text-color);
+}
+
+/* Section title with neon accent */
+.section-title {
+  font-size: 1.05rem;
+  margin: 6px 0;
+  color: var(--header-text-color);
+  font-weight: 900;
+  border-left: 6px solid var(--primary-color);
+  padding-left: 10px;
+  background: linear-gradient(90deg, rgba(0,255,157,0.03), transparent);
+  border-radius: 6px;
+  letter-spacing: 0.4px;
+}
+
+/* Header inside the floating nav: grid layout like the printable HTML */
+.nav-float > div .header {
+  display: grid;
+  grid-template-columns: 120px 1fr auto;
+  gap: 10px;
+  align-items: center;
+  padding: 8px;
+  border-radius: 6px;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.05);
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', monospace;
+}
+
+/* Position controls (EN/ES + theme) top-right inside the floating panel */
+.nav-float > div .header-controls {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  margin-left: 0;
+}
+
+/* In dark theme, tune card font to monospace like printable hacker style */
+html[data-theme="dark"] .card-section {
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', monospace;
+  letter-spacing: 0.2px;
+}
+
+/* In light mode, restore the previous sans-serif for main titles to match the original look */
+html:not([data-theme="dark"]) .nombre {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  color: white; /* title text should be white in light mode */
+}
+
+html:not([data-theme="dark"]) .section-title {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  color: var(--header-text-color);
+}
+
 .header-left .foto,
 .foto {
   transition: width 220ms ease, height 220ms ease, transform 300ms ease;
@@ -126,6 +250,22 @@ button, a {
     display: flex;
     flex-direction: column;
     justify-content: center;
+  }
+}
+
+/* Desktop: place the controls inside the header rectangle (top-right but closer) */
+@media (min-width: 1000px) {
+  /* Make controls flow inside the header grid's third column instead of absolutely positioned */
+  .nav-float > div .header-controls {
+    position: static !important;
+    top: auto !important;
+    right: auto !important;
+    margin-right: 8px !important; /* bring slightly closer to the name box */
+  }
+
+  /* Reduce the header's right padding so controls sit closer to the header content */
+  .nav-float > div .header {
+    padding-right: 12px !important;
   }
 }
 
@@ -291,6 +431,16 @@ button, a {
     line-height: 1 !important;
   }
 
+  /* Ensure theme toggle matches the language button size on small screens */
+  .header-controls .header-toggle {
+    width: 40px !important;
+    height: 40px !important;
+    padding: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
   /* when viewport is narrow, make controls compact */
   .header-email { display: none; }
   .header-controls .ms-2 button { margin-top: 4px !important; }
@@ -319,6 +469,11 @@ button, a {
     width: 36px !important;
     height: 36px !important;
     font-size: 12px !important;
+  }
+
+  .header-controls .header-toggle {
+    width: 36px !important;
+    height: 36px !important;
   }
 }
 
@@ -387,6 +542,17 @@ footer {
   .header { padding-top: 6px !important; padding-bottom: 6px !important; min-height: auto !important; }
 }
 
+/* Dark-mode mobile: slightly reduce title size and add right padding to avoid overlapping the controls */
+@media (max-width: 420px) {
+  html[data-theme="dark"] .nombre {
+    font-size: 1.0rem !important;
+    font-weight: 700 !important;
+    padding-right: 60px !important; /* leave space for the controls at the top-right */
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+}
 @media (max-width: 420px) {
   /* Slightly smaller name on very small phones but still larger than before */
   .nombre { font-size: 1.35rem !important; }
