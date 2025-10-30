@@ -11,8 +11,8 @@
     html, body { height: 297mm; margin: 0; padding: 0; }
     body {
       font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      font-size: 15px; /* base text size adjusted to match Perfil lead line */
-      line-height: 1.18;
+      font-size: 14px; /* slightly reduced to help fit one A4 page */
+      line-height: 1.16;
       color: #12323a;
       background: #f7fdfd;
       -webkit-print-color-adjust: exact;
@@ -24,27 +24,27 @@
     .page {
       /* Full sheet; we control internal margins with padding so printing uses only our margins */
       width: 210mm;
-      min-height: 297mm;
+      height: 297mm;
       display: flex;
       flex-direction: column;
       margin: 0 auto;
       background: white;
       border-radius: 4px;
       box-shadow: 0 8px 20px rgba(18,50,58,0.06);
-      padding: 8mm; /* slightly tighter margin to gain space */
+      padding: 6mm; /* slightly tighter margin to gain space */
       box-sizing: border-box;
     }
 
     .header {
       display: flex;
-      gap: 10px;
+      gap: 8px;
       align-items: center;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       background: linear-gradient(180deg, #3B8E8C 0%, #2e7a79 100%);
       color: white;
-      padding: 10px 10px;
+      padding: 8px 8px;
       border-radius: 6px;
-      box-shadow: 0 6px 16px rgba(59,142,140,0.12);
+      box-shadow: 0 4px 10px rgba(59,142,140,0.09);
     }
     .header-skills { margin-top:6px; display:flex; gap:6px; flex-wrap:wrap; align-items:center }
     .badge {
@@ -58,17 +58,17 @@
       letter-spacing: 0.3px;
     }
     .foto {
-      width: 130px;
-      height: 170px; /* increased image to give stronger header presence */
+      width: 120px;
+      height: 150px; /* reduced slightly to save vertical space for print */
       object-fit: cover;
       border-radius: 8px;
       border: 2px solid rgba(255,255,255,0.18);
       flex-shrink: 0;
     }
     .nombre {
-      font-size: 24px;
+      font-size: 20px;
       font-weight: 800;
-      margin: 0 0 6px 0;
+      margin: 0 0 4px 0;
       line-height: 1.02;
       white-space: nowrap; /* force single line */
       overflow: hidden;
@@ -98,9 +98,9 @@
     .grid {
       display: grid;
       /* Top row: perfil (auto height). Bottom row: two columns where Experiencia is wider. */
-      grid-template-columns: 80mm 1fr;
+      grid-template-columns: 78mm 1fr;
       grid-template-rows: auto 1fr;
-      gap: 10px 12px;
+      gap: 6px 8px;
       align-items: stretch;
       height: 100%;
     }
@@ -109,31 +109,31 @@
   .col-right { grid-column: 2 / 3; display:flex; flex-direction:column; gap:8px; }
 
     h2.section-title {
-      font-size: 17px;
-      margin: 6px 0 6px 0;
-      color: #073b3b;
-      font-weight: 900;
-      border-left: 6px solid #17a39a;
-      padding-left: 10px;
-      background: linear-gradient(90deg, rgba(23,163,154,0.06), transparent);
-      border-radius: 6px;
-      letter-spacing: 0.6px;
-    }
+        font-size: 16px;
+        margin: 4px 0 6px 0;
+        color: #073b3b;
+        font-weight: 900;
+        border-left: 4px solid #17a39a;
+        padding-left: 8px;
+        background: linear-gradient(90deg, rgba(23,163,154,0.05), transparent);
+        border-radius: 6px;
+        letter-spacing: 0.5px;
+      }
   .section { margin-bottom: 4px; }
   /* Paragraphs: small top gap, larger bottom gap to separate entries */
-  .section p { margin: 2px 0 10px 0; font-size: 15px; color: #12323a; line-height: 1.26 }
+  .section p { margin: 2px 0 8px 0; font-size: 14px; color: #12323a; line-height: 1.22 }
   /* Titles (strong) within a paragraph should sit on their own line with minimal gap to the following content */
   .section p strong { display: block; margin-bottom: 0px; }
-  .section ul { margin: 4px 0 4px 14px; padding: 0; font-size: 15px; }
-  .section ul li { margin-bottom: 4px; }
+  .section ul { margin: 4px 0 4px 14px; padding: 0; font-size: 14px; }
+  .section ul li { margin-bottom: 3px; }
 
   /* Card visual style for main sections to reduce white space and improve balance */
   .card {
     background: #ffffff;
-    padding: 8px 10px;
+    padding: 6px 8px;
     border-radius: 6px;
-    box-shadow: 0 6px 14px rgba(18,50,58,0.04);
-    border-left: 6px solid rgba(59,142,140,0.12);
+    box-shadow: 0 4px 10px rgba(18,50,58,0.03);
+    border-left: 5px solid rgba(59,142,140,0.10);
     display: flex;
     flex-direction: column;
     gap: 6px;
@@ -165,6 +165,8 @@
 
     /* Print-specific: avoid page breaks inside sections */
   .section { page-break-inside: avoid; }
+  /* prevent the header from being pushed to next page by margins */
+  header.header { page-break-after: avoid; }
 
     /* If the content still doesn't fit, the user can reduce scale in print dialog.
        Tiny screens fallback: stack columns */
