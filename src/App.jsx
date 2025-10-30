@@ -107,11 +107,11 @@ export default function App() {
         ),
         experiencia: (
           <>
-            <p><strong>Colaboradora en desarrollo de aplicaciones</strong></p>
+            <p><strong>Colaboradora en desarrollo de aplicaciones (Full Stack Developer)</strong></p>
             <p>Proyecto Colaborativo (Septiembre 2025 - Actualidad)</p>
             <p>Proyecto Booksycle:</p>
             <p>Colaboración en el desarrollo de Booksycle, una aplicación para Android, iOS y Web centrada en la compra y venta de libros de segunda mano.</p>
-            <p>Participación en todo el proceso desde la idea hasta el MVP, utilizando React, Laravel, PHP y MySQL (Full Stack).</p>
+            <p>Participación en todo el proceso desde la idea hasta el MVP, utilizando React, Laravel, PHP y MySQL.</p>
             <p>Trabajo en equipo con otros desarrolladores en un entorno ágil y colaborativo.</p>
             <p><a href="https://www.booksycle.com" target="_blank" rel="noopener noreferrer">www.booksycle.com</a></p>
 
@@ -180,11 +180,11 @@ export default function App() {
         ),
         experiencia: (
           <>
-            <p><strong>Collaborator — Application Development</strong></p>
+            <p><strong>Collaborator — Application Development (Full Stack Developer)</strong></p>
             <p>Project Booksycle: Collaborative Project (September 2025 - Present)</p>
             <p>Project Booksycle:</p>
             <p>Collaboration in the development of Booksycle, an Android, iOS, and Web application focused on buying and selling second-hand books.</p>
-            <p>Participation in the entire process from the idea to the MVP, using React, Laravel, PHP and MySQL (Full Stack).</p>
+            <p>Participation in the entire process from the idea to the MVP, using React, Laravel, PHP and MySQL.</p>
             <p>Teamwork with other developers in an agile and collaborative environment.</p>
             <p><a href="https://www.booksycle.com" target="_blank" rel="noopener noreferrer">www.booksycle.com</a></p>
 
