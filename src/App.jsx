@@ -107,7 +107,7 @@ export default function App() {
         ),
         experiencia: (
           <>
-            <p><strong>Colaboradora en desarrollo de aplicaciones (Full Stack Developer)</strong></p>
+            <p><strong>Colaboradora en desarrollo de software (Full Stack Developer)</strong></p>
             <p>Proyecto Colaborativo (Septiembre 2025 - Actualidad)</p>
             <p>Proyecto Booksycle:</p>
             <p>Colaboración en el desarrollo de Booksycle, una aplicación para Android, iOS y Web centrada en la compra y venta de libros de segunda mano.</p>
@@ -180,7 +180,7 @@ export default function App() {
         ),
         experiencia: (
           <>
-            <p><strong>Collaborator — Application Development (Full Stack Developer)</strong></p>
+            <p><strong>Collaborator in software development (Full Stack Developer)</strong></p>
             <p>Project Booksycle: Collaborative Project (September 2025 - Present)</p>
             <p>Project Booksycle:</p>
             <p>Collaboration in the development of Booksycle, an Android, iOS, and Web application focused on buying and selling second-hand books.</p>
